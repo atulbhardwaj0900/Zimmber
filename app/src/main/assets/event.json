@@ -1,0 +1,130 @@
+{
+  "_id": "5739590ad04f90a410000020",
+  "all_day": false,
+  "created_at": "2016-05-26T01:02:18Z",
+  "description": "It is a long established fast that a reader will be distracted by the readable content of a page when looking.",
+  "name": "Atul Test Event: EM3 Agri Services",
+  "start_time": "2016-05-26T01:30:00Z",
+  "allow_comments": true,
+  "organizer_email": null,
+  "tags": [],
+  "recurring": false,
+  "external_source": null,
+  "posts_count": 0,
+  "updated_at": "2016-05-26T01:33:39Z",
+  "end_time": "2016-05-27T12:30:00+00:00",
+  "attending_status": "y",
+  "friends_attending": false,
+  "attendings_count": 3,
+  "friends_count": 0,
+  "top_attending_users": [
+    {
+      "_id": "57394330d04f908a1f000519",
+      "full_name": "ABC Test",
+      "email": "abc@gmail.com",
+      "image": {
+        "normal": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57394330d04f908a1f000519/C501DD69-AC37-4F73-9909-BBB6911BCB97-40038-00004F36DED7FF20.png",
+        "thumb": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57394330d04f908a1f000519/C501DD69-AC37-4F73-9909-BBB6911BCB97-40038-00004F36DED7FF20.png"
+      }
+    },
+    {
+      "_id": "56421d66d04f90b01f000001",
+      "full_name": "XYZ ",
+      "email": "xyz@gmail.com",
+      "image": {
+        "normal": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/56421d66d04f90b01f000001/photo.png",
+        "thumb": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/56421d66d04f90b01f000001/photo.png"
+      }
+    },
+    {
+      "_id": "57299fe9d04f9049af00001e",
+      "full_name": "PQR",
+      "email": "pqr@gmail.com",
+      "image": {
+        "normal": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57299fe9d04f9049af00001e/photo.png",
+        "thumb": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57299fe9d04f9049af00001e/photo.png"
+      }
+    }
+  ],
+  "latest_comments": [],
+  "facebook_link": null,
+  "can_edit": false,
+  "has_survey": false,
+  "survey_id": null,
+  "survey_answered": null,
+  "public_url": "https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57299fe9d04f9049af00001e/photo.png",
+  "attendees": [
+    {
+      "email": "abc@gmail.com",
+      "facebook_id": null,
+      "display_name": "ABC Test",
+      "response_status": "y",
+      "attendee_type": "User",
+      "comment": null
+    },
+    {
+      "email": "xyz@gmail.com",
+      "facebook_id": null,
+      "display_name": "XYZ",
+      "response_status": "y",
+      "attendee_type": "User",
+      "comment": null
+    }
+  ],
+  "interest_line": "3 people are going",
+  "is_ticket_event": false,
+  "number_of_tickets_purchased": 0,
+  "ticket_min_price": null,
+  "seat_maps": [],
+  "list": {
+    "_id": "573038ebd04f90a6d0000030",
+    "name": "Atul Testing group",
+    "picture_url": "http://turbo.premiumpixels.com/wp-content/uploads/2011/05/preview4.jpg"
+  },
+  "calendar": {
+    "_id": null,
+    "name": null
+  },
+  "image": {
+    "normal": "https://involvio-staging.s3.amazonaws.com/uploads/event_picture/picture/5739597cd04f90b5a2000060/45312197-BEDE-494B-8AE6-481B14CA39C7-40038-00004EF1696986B8.png",
+    "thumb": "https://involvio-staging.s3.amazonaws.com/uploads/event_picture/picture/5739597cd04f90b5a2000060/45312197-BEDE-494B-8AE6-481B14CA39C7-40038-00004EF1696986B8.png"
+  },
+  "invitor_names": "",
+  "place": {
+    "_id": "57395af1d04f90a410000025",
+    "bid": null,
+    "fb_id": null,
+    "loc": [
+      "28.6228797",
+      "77.36725539999999"
+    ],
+    "name": "Advant Tower",
+    "room_id": null,
+    "room_name": "123",
+    "address": ""
+  },
+  "time_zone": "Eastern Time (US \u0026 Canada)",
+  "cancelled": false,
+  "has_all_tickets_refunded": false,
+  "color": "#cca6ac",
+  "advisors": [],
+  "faculties": [],
+  "guide": {
+    "_id": null,
+    "name": null
+  },
+  "is_sis_event": false,
+  "type": "Event",
+  "done": null,
+  "done_at": null,
+  "is_default_image": false,
+  "post_params": {
+    "postable_type": "Event",
+    "postable_id": "5739590ad04f90a410000020"
+  },
+  "is_class_event": false,
+  "is_personal_event": false,
+  "class_data": {},
+  "recurrence_rule": null,
+  "google_calendar_name": null
+}
