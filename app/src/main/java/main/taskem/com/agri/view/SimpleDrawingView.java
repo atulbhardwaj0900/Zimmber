@@ -23,7 +23,7 @@ import main.taskem.com.agri.models.CirclePoint;
 public class SimpleDrawingView extends FrameLayout {
 	private static final int CIRCLE_RADIUS = 100;
 	// setup initial color
-	private final int paintColor = Color.BLACK;
+	private int paintColor;
 	// defines paint and canvas
 	private Handler mHandler;
 	// Store circles to draw each time the user touches down
@@ -35,8 +35,12 @@ public class SimpleDrawingView extends FrameLayout {
 	public SimpleDrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
-		setupPaint(); // same as before
-		mCirclePointList = new ArrayList<>();
+		mCirclePointList = DBHelper.getInstance(mContext).getAllPointsList();
+		if (mCirclePointList == null) {
+			mCirclePointList = new ArrayList<>();
+		} else {
+			setupPaint();
+		}
 	}
 
 	public SimpleDrawingView(Context context) {
@@ -58,7 +62,7 @@ public class SimpleDrawingView extends FrameLayout {
 	}
 
 	public void savePointsList() {
-		 DBHelper.getInstance(mContext).savePoints(mCirclePointList);
+		DBHelper.getInstance(mContext).savePoints(mCirclePointList);
 	}
 
 	final GestureDetector gestureDetector =
@@ -118,10 +122,9 @@ public class SimpleDrawingView extends FrameLayout {
 		View view = new View(mContext);
 		view.setBackground(mContext.getResources().getDrawable(R.drawable.circle));
 		int radius = circlePoint.r > 0 ? circlePoint.r : CIRCLE_RADIUS;
-		FrameLayout.LayoutParams params =
-				new FrameLayout.LayoutParams(radius, radius);
-		params.leftMargin = circlePoint.x - circlePoint.r/2;
-		params.topMargin = circlePoint.y - circlePoint.r/2;
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(radius, radius);
+		params.leftMargin = circlePoint.x - circlePoint.r / 2;
+		params.topMargin = circlePoint.y - circlePoint.r / 2;
 		view.setLayoutParams(params);
 		addView(view);
 		GradientDrawable bgShape = (GradientDrawable) view.getBackground();
@@ -129,4 +132,7 @@ public class SimpleDrawingView extends FrameLayout {
 		mCurrentView = view;
 	}
 
+	public void setCircleColor(int color) {
+		paintColor = color;
+	}
 }

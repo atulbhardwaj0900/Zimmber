@@ -1,5 +1,8 @@
 package main.taskem.com.agri.adapter;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,43 +10,47 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 import main.taskem.com.agri.R;
 
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
  */
-public class MainHorizontalAdapter extends JsonArrayAdapter {
+public abstract class MainHorizontalAdapter extends RecyclerView.Adapter implements View.OnClickListener {
 
-	public MainHorizontalAdapter(OnRecyclerItemClick<JSONObject> onRecyclerItemClick) {
-		super(onRecyclerItemClick);
+	private List<Integer> colorsList;
+	public MainHorizontalAdapter(List<Integer> colorsList){
+		this.colorsList = colorsList;
 	}
 
 	@Override
-	public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		super.onCreateViewHolder(parent, viewType);
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.person_view, parent, false);
-		return new MyViewHolder(view);
+	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		View itemView = LayoutInflater.from(parent.getContext())
+				.inflate(R.layout.circle_selector_layout, parent, false);
+		return new CircleVH(itemView);
 	}
 
 	@Override
-	protected void bindDataToView(BaseViewHolder holder, JSONObject note, int position) {
-		MyViewHolder viewHolder = (MyViewHolder) holder;
-		//viewHolder.title.setText(note.getTitle());
-		//viewHolder.detail.setText(note.getDetail());
+	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+		CircleVH vh = (CircleVH)holder;
+		GradientDrawable backgroundGradient = (GradientDrawable)vh.circle.getBackground();
+			backgroundGradient.setColor(colorsList.get(position));
+		vh.circle.setTag(colorsList.get(position));
+		vh.circle.setOnClickListener(this);
 	}
 
-	public class MyViewHolder extends BaseViewHolder {
+	@Override
+	public int getItemCount() {
+		return colorsList.size();
+	}
 
-		private TextView title;
-		private TextView detail;
-
-		public MyViewHolder(View itemView) {
+	private class CircleVH extends  RecyclerView.ViewHolder{
+		View circle;
+		public CircleVH(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.person_img);
-			detail = (TextView) itemView.findViewById(R.id.person_name_txt);
+			circle = itemView.findViewById(R.id.circle);
 		}
 	}
-
 }

@@ -8,10 +8,10 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.ScrollingActivity">
 
-
-    <include
-        android:id="@+id/main_container_view"
-        layout="@layout/content_scrolling"/>
-
-
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_fragment"
+        android:name="main.taskem.com.agri.fragment.MainFragment"
+/>
 </android.support.design.widget.CoordinatorLayout>

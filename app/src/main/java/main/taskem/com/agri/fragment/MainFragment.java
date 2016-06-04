@@ -2,14 +2,20 @@ package main.taskem.com.agri.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import main.taskem.com.agri.R;
 import main.taskem.com.agri.adapter.JsonArrayAdapter.OnRecyclerItemClick;
-import main.taskem.com.agri.controller.Controller;
+import main.taskem.com.agri.adapter.MainHorizontalAdapter;
 import main.taskem.com.agri.view.SimpleDrawingView;
 
 /**
@@ -17,23 +23,40 @@ import main.taskem.com.agri.view.SimpleDrawingView;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JSONObject> {
-	private SimpleDrawingView mFragmentView;
 
+	private SimpleDrawingView simpleDrawingView;
+	List<Integer> colors;
 	public MainFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mFragmentView = new SimpleDrawingView(mBaseActivity);
-
+		colors  = new ArrayList<Integer>();
+		colors.add(android.graphics.Color.RED);
+		colors.add(android.graphics.Color.GREEN);
+		colors.add(android.graphics.Color.BLUE);
+		colors.add(android.graphics.Color.YELLOW);
+		colors.add(android.graphics.Color.rgb(255, 200, 0));
+		colors.add(android.graphics.Color.MAGENTA);
+		View mFragmentView = inflater.inflate(R.layout.main_fragment,container,false);
+		simpleDrawingView = (SimpleDrawingView)mFragmentView.findViewById(R.id.main_fragment);
+		RecyclerView recyclerView = (RecyclerView) mFragmentView.findViewById(R.id.circle_bar);
+		LinearLayoutManager layoutManager
+				= new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+		MainHorizontalAdapter mainHorizontalAdapter = new MainHorizontalAdapter(colors){
+			@Override
+			public void onClick(View v) {
+				simpleDrawingView.setCircleColor((Integer) v.getTag());
+			}
+		};
+		recyclerView.setLayoutManager(layoutManager);
+		recyclerView.setAdapter(mainHorizontalAdapter);
 		return mFragmentView;
 	}
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Controller controller = new Controller(getContext());
-		controller.loadContent();
 	}
 
 
@@ -45,7 +68,7 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 
 	@Override
 	public void onBackPressed() {
-		mFragmentView.savePointsList();
+		simpleDrawingView.savePointsList();
 		mBaseActivity.finish();
 	}
 }
