@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/circle_bar"
             android:gravity="center_horizontal"
             android:weightSum="6"
@@ -21,37 +21,9 @@
             android:layout_height="90dp"
             android:orientation="horizontal"
             android:background="#000000">
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-            <View
-                android:layout_margin="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/circle"/>
-        </LinearLayout>
+
+
+        </android.support.v7.widget.RecyclerView>
         <main.taskem.com.agri.view.SimpleDrawingView
             android:layout_weight="8"
             android:id="@+id/main_fragment"
