@@ -1,36 +1,40 @@
 package main.taskem.com.agri.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import main.taskem.com.agri.R;
+
 /**
  * Created by atul.bhardwaj on 04/06/16.
  */
-public class SimpleDrawingView extends View {
+public class SimpleDrawingView extends FrameLayout {
+	private static final int CIRCLE_RADIUS = 100;
 	// setup initial color
 	private final int paintColor = Color.BLACK;
 	// defines paint and canvas
-	private Paint drawPaint;
+	private Handler mHandler;
 	// Store circles to draw each time the user touches down
 	private List<Point> circlePoints;
 	private Context mContext;
+	private View mCurrentView;
+	private int mLastRadius;
+	//private
 
 	public SimpleDrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
-		drawPaint = new Paint();
 		setupPaint(); // same as before
 		circlePoints = new ArrayList<Point>();
 	}
@@ -38,59 +42,83 @@ public class SimpleDrawingView extends View {
 	public SimpleDrawingView(Context context) {
 		super(context);
 		mContext = context;
-		drawPaint = new Paint();
-		setupPaint(); // same as before
+		setupPaint();
 		circlePoints = new ArrayList<Point>();
+//		setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//				ViewGroup.LayoutParams.MATCH_PARENT));
 
 	}
 
-	// Draw each circle onto the view
-	@Override
-	protected void onDraw(Canvas canvas) {
-		for (Point p : circlePoints) {
-			canvas.drawCircle(p.x, p.y, 50, drawPaint);
-		}
-	}
 
-//	// Append new circle each time user presses on screen
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		switch (event.getActionMasked()) {
-//			case MotionEvent.ACTION_DOWN:
-//				float touchX = event.getX();
-//				float touchY = event.getY();
-//				circlePoints.add(new Point(Math.round(touchX), Math.round(touchY)));
-//				// indicate view should be redrawn
-//				postInvalidate();
-//		}
-//		return true;
-//	}
 
 	private void setupPaint() {
-		// same as before
-		drawPaint.setStyle(Paint.Style.FILL); // change to fill
-		// ...
+
 	}
 
 	final GestureDetector gestureDetector =
 			new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
-				public void onLongPress(MotionEvent e) {
-					Log.e("", "Longpress detected");
-					Toast.makeText(mContext, "L", Toast.LENGTH_SHORT).show();
+				public void onLongPress(MotionEvent event) {
+					if (mHandler == null) {
+						mHandler = new Handler();
+					}
+					mHandler.post(runnable);
 				}
+
 
 				@Override
 				public boolean onDown(MotionEvent event) {
+
 					float touchX = event.getX();
 					float touchY = event.getY();
 					circlePoints.add(new Point(Math.round(touchX), Math.round(touchY)));
-					// indicate view should be redrawn
-					postInvalidate();
+					Point pp = circlePoints.get(circlePoints.size() - 1);
+					drawCircle(pp);
 					return true;
 				}
-			});
 
-		public boolean onTouchEvent(MotionEvent event) {
-			return gestureDetector.onTouchEvent(event);
-		};
+			}
+
+			);
+
+	public boolean onTouchEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			if (mHandler != null) {
+				mHandler.removeCallbacks(runnable);
+			}
+		}
+		return gestureDetector.onTouchEvent(event);
+	}
+
+
+	Runnable runnable = new Runnable() {
+		@Override
+		public void run() {
+			if (mCurrentView != null) {
+				mLastRadius += 2;
+				FrameLayout.LayoutParams params =
+						new FrameLayout.LayoutParams(mLastRadius, mLastRadius);
+				Point pp = circlePoints.get(circlePoints.size() - 1);
+				params.leftMargin = pp.x - mLastRadius / 2;
+				params.topMargin = pp.y - mLastRadius / 2;
+				mCurrentView.setLayoutParams(params);
+			}
+			mHandler.postDelayed(runnable, 20);
+		}
+	};
+
+	private void drawCircle(Point pp) {
+		View view = new View(mContext);
+		view.setBackground(mContext.getResources().getDrawable(R.drawable.circle));
+		FrameLayout.LayoutParams params =
+				new FrameLayout.LayoutParams(CIRCLE_RADIUS, CIRCLE_RADIUS);
+		mLastRadius = CIRCLE_RADIUS;
+		params.leftMargin = pp.x - CIRCLE_RADIUS / 2;
+		params.topMargin = pp.y - CIRCLE_RADIUS / 2;
+		view.setLayoutParams(params);
+		addView(view);
+		GradientDrawable bgShape = (GradientDrawable) view.getBackground();
+		bgShape.setColor(Color.GREEN);
+		mCurrentView = view;
+	}
+
 }
