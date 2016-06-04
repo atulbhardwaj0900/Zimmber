@@ -7,11 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import main.taskem.com.agri.R;
+import main.taskem.com.agri.common.OnBackPressedListener;
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
  */
 public class BaseActivity extends AppCompatActivity {
+	protected OnBackPressedListener onBackPressedListener;
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,5 +32,17 @@ public class BaseActivity extends AppCompatActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+		this.onBackPressedListener = onBackPressedListener;
+	}
+
+	@Override
+	public void onBackPressed() {
+		if(onBackPressedListener != null) {
+			onBackPressedListener.onBackPressed();
+			return;
+		}
+		super.onBackPressed();
 	}
 }

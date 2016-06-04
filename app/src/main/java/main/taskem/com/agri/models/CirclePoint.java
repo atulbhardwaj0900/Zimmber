@@ -34,6 +34,12 @@ public class CirclePoint implements Parcelable {
 		this.y = y;
 		this.r = r;
 	}
+	/**
+	 * Set the point's x and y coordinates
+	 */
+	public void setRadius(int r) {
+		this.r = r;
+	}
 
 	/**
 	 * Negate the point's coordinates

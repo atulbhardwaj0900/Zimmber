@@ -17,7 +17,7 @@ import main.taskem.com.agri.view.SimpleDrawingView;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JSONObject> {
-	private View mFragmentView;
+	private SimpleDrawingView mFragmentView;
 
 	public MainFragment() {
 	}
@@ -37,13 +37,15 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 	}
 
 
-	@Override
-	public void onClick(View v) {
-
-	}
 
 	@Override
 	public void onRecyclerItemClick(int position, JSONObject object) {
 
+	}
+
+	@Override
+	public void onBackPressed() {
+		mFragmentView.savePointsList();
+		mBaseActivity.finish();
 	}
 }

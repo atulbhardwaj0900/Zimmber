@@ -2,7 +2,6 @@ package main.taskem.com.agri.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.taskem.com.agri.R;
+import main.taskem.com.agri.database.DBHelper;
+import main.taskem.com.agri.models.CirclePoint;
 
 /**
  * Created by atul.bhardwaj on 04/06/16.
@@ -26,33 +27,38 @@ public class SimpleDrawingView extends FrameLayout {
 	// defines paint and canvas
 	private Handler mHandler;
 	// Store circles to draw each time the user touches down
-	private List<Point> circlePoints;
+	private List<CirclePoint> mCirclePointList;
 	private Context mContext;
 	private View mCurrentView;
 	private int mLastRadius;
-	//private
 
 	public SimpleDrawingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 		setupPaint(); // same as before
-		circlePoints = new ArrayList<Point>();
+		mCirclePointList = new ArrayList<>();
 	}
 
 	public SimpleDrawingView(Context context) {
 		super(context);
 		mContext = context;
-		setupPaint();
-		circlePoints = new ArrayList<Point>();
-//		setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//				ViewGroup.LayoutParams.MATCH_PARENT));
+		mCirclePointList = DBHelper.getInstance(mContext).getAllPointsList();
+		if (mCirclePointList == null) {
+			mCirclePointList = new ArrayList<>();
+		} else {
+			setupPaint();
+		}
 
 	}
 
-
-
 	private void setupPaint() {
+		for (CirclePoint circlePoint : mCirclePointList) {
+			drawCircle(circlePoint);
+		}
+	}
 
+	public void savePointsList() {
+		 DBHelper.getInstance(mContext).savePoints(mCirclePointList);
 	}
 
 	final GestureDetector gestureDetector =
@@ -64,14 +70,15 @@ public class SimpleDrawingView extends FrameLayout {
 					mHandler.post(runnable);
 				}
 
-
 				@Override
 				public boolean onDown(MotionEvent event) {
 
 					float touchX = event.getX();
 					float touchY = event.getY();
-					circlePoints.add(new Point(Math.round(touchX), Math.round(touchY)));
-					Point pp = circlePoints.get(circlePoints.size() - 1);
+					mCirclePointList.add(new CirclePoint(Math.round(touchX), Math.round(touchY),
+							CIRCLE_RADIUS / 2));
+					mLastRadius = CIRCLE_RADIUS;
+					CirclePoint pp = mCirclePointList.get(mCirclePointList.size() - 1);
 					drawCircle(pp);
 					return true;
 				}
@@ -97,23 +104,24 @@ public class SimpleDrawingView extends FrameLayout {
 				mLastRadius += 2;
 				FrameLayout.LayoutParams params =
 						new FrameLayout.LayoutParams(mLastRadius, mLastRadius);
-				Point pp = circlePoints.get(circlePoints.size() - 1);
-				params.leftMargin = pp.x - mLastRadius / 2;
-				params.topMargin = pp.y - mLastRadius / 2;
+				CirclePoint circlePoint = mCirclePointList.get(mCirclePointList.size() - 1);
+				params.leftMargin = circlePoint.x - mLastRadius / 2;
+				params.topMargin = circlePoint.y - mLastRadius / 2;
+				circlePoint.setRadius(mLastRadius);
 				mCurrentView.setLayoutParams(params);
 			}
 			mHandler.postDelayed(runnable, 20);
 		}
 	};
 
-	private void drawCircle(Point pp) {
+	private void drawCircle(CirclePoint circlePoint) {
 		View view = new View(mContext);
 		view.setBackground(mContext.getResources().getDrawable(R.drawable.circle));
+		int radius = circlePoint.r > 0 ? circlePoint.r : CIRCLE_RADIUS;
 		FrameLayout.LayoutParams params =
-				new FrameLayout.LayoutParams(CIRCLE_RADIUS, CIRCLE_RADIUS);
-		mLastRadius = CIRCLE_RADIUS;
-		params.leftMargin = pp.x - CIRCLE_RADIUS / 2;
-		params.topMargin = pp.y - CIRCLE_RADIUS / 2;
+				new FrameLayout.LayoutParams(radius, radius);
+		params.leftMargin = circlePoint.x - circlePoint.r/2;
+		params.topMargin = circlePoint.y - circlePoint.r/2;
 		view.setLayoutParams(params);
 		addView(view);
 		GradientDrawable bgShape = (GradientDrawable) view.getBackground();

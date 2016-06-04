@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "main.taskem.com.agri"
+        applicationId "com.zimmber.main"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
