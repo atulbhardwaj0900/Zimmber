@@ -52,6 +52,7 @@ public class SimpleDrawingView extends View {
 		}
 	}
 
+
 //	// Append new circle each time user presses on screen
 //	@Override
 //	public boolean onTouchEvent(MotionEvent event) {
@@ -65,6 +66,10 @@ public class SimpleDrawingView extends View {
 //		}
 //		return true;
 //	}
+	public void setCircleColor(int circleColor){
+		drawPaint.setColor(circleColor);
+	}
+
 
 	private void setupPaint() {
 		// same as before
