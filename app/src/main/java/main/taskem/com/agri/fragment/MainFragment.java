@@ -56,7 +56,7 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+		super.onActivityCreated(savedInstanceState); 
 	}
 
 
