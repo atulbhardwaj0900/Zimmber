@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String CIRCLE_X = "x";
 	public static final String CIRCLE_Y = "y";
 	public static final String CIRCLE_R = "r";
+	public static final String CIRCLE_COLOR = "color";
 	private static DBHelper mDbHelper;
 
 	public static DBHelper getInstance(Context context) {
@@ -40,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("create table " + ZIMMBER_TABLE +
-				"(x integer, y integer, r integer)");
+				"(x integer, y integer, r integer, color integer)");
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				db.beginTransaction();
 				String sql =
 						"Insert into " + ZIMMBER_TABLE + " (" + CIRCLE_X + "," + CIRCLE_Y + "," +
-								CIRCLE_R + ") values(?,?,?)";
+								CIRCLE_R + "," + CIRCLE_COLOR + ") values(?,?,?,?)";
 				SQLiteStatement insert = db.compileStatement(sql);
 				db.beginTransaction();
 
@@ -66,6 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
 					insert.bindLong(1, circlePoint.x);
 					insert.bindLong(2, circlePoint.y);
 					insert.bindLong(3, circlePoint.r);
+					insert.bindLong(4, circlePoint.color);
 					insert.execute();
 				}
 				db.setTransactionSuccessful();
@@ -97,7 +99,7 @@ public class DBHelper extends SQLiteOpenHelper {
 			while (!res.isAfterLast()) {
 				note = new CirclePoint();
 				note.set(res.getInt(res.getColumnIndex(CIRCLE_X)), res.getInt(res.getColumnIndex(CIRCLE_Y)), res.getInt(res.getColumnIndex(
-						CIRCLE_R)));
+						CIRCLE_R)),res.getInt(res.getColumnIndex(CIRCLE_COLOR)));
 				list.add(note);
 				res.moveToNext();
 			}

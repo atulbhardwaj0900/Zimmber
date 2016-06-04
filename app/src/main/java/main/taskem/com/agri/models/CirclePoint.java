@@ -11,28 +11,40 @@ public class CirclePoint implements Parcelable {
 	public int x;
 	public int y;
 	public int r;
+	public int color;
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
 
 	public CirclePoint() {}
 
-	public CirclePoint(int x, int y, int r) {
+	public CirclePoint(int x, int y, int r, int color) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
+		this.color = color;
 	}
 
 	public CirclePoint(CirclePoint src) {
 		this.x = src.x;
 		this.y = src.y;
 		this.r = src.r;
+		this.color = src.color;
 	}
 
 	/**
 	 * Set the point's x and y coordinates
 	 */
-	public void set(int x, int y, int r) {
+	public void set(int x, int y, int r, int color) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
+		this.color = color;
 	}
 	/**
 	 * Set the point's x and y coordinates
@@ -61,8 +73,8 @@ public class CirclePoint implements Parcelable {
 	/**
 	 * Returns true if the point's coordinates equal (x,y)
 	 */
-	public final boolean equals(int x, int y, int r) {
-		return this.x == x && this.y == y && this.r == r;
+	public final boolean equals(int x, int y, int r, int color) {
+		return this.x == x && this.y == y && this.r == r && this.color == color;
 	}
 
 	@Override
@@ -75,6 +87,7 @@ public class CirclePoint implements Parcelable {
 		if (x != point.x) return false;
 		if (y != point.y) return false;
 		if (r != point.r) return false;
+		if (color != point.color) return false;
 
 		return true;
 	}
@@ -88,7 +101,7 @@ public class CirclePoint implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "CirclePoint(" + x + ", " + y +  ", " +r +")";
+		return "CirclePoint(" + x + ", " + y +  ", " +r +  ", " +color +")";
 	}
 
 	/**
@@ -109,6 +122,7 @@ public class CirclePoint implements Parcelable {
 		out.writeInt(x);
 		out.writeInt(y);
 		out.writeInt(r);
+		out.writeInt(color);
 	}
 
 	public static final Parcelable.Creator<CirclePoint> CREATOR = new Parcelable.Creator<CirclePoint>() {
@@ -139,6 +153,7 @@ public class CirclePoint implements Parcelable {
 		x = in.readInt();
 		y = in.readInt();
 		r = in.readInt();
+		color = in.readInt();
 	}
 }
 

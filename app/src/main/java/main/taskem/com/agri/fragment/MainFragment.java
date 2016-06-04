@@ -16,7 +16,7 @@ import java.util.List;
 import main.taskem.com.agri.R;
 import main.taskem.com.agri.adapter.JsonArrayAdapter.OnRecyclerItemClick;
 import main.taskem.com.agri.adapter.MainHorizontalAdapter;
-import main.taskem.com.agri.view.SimpleDrawingView;
+import main.taskem.com.agri.view.CircleContainerView;
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
@@ -24,7 +24,7 @@ import main.taskem.com.agri.view.SimpleDrawingView;
  */
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JSONObject> {
 
-	private SimpleDrawingView simpleDrawingView;
+	private CircleContainerView simpleDrawingView;
 	List<Integer> colors;
 	public MainFragment() {
 	}
@@ -39,7 +39,7 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 		colors.add(android.graphics.Color.rgb(255, 200, 0));
 		colors.add(android.graphics.Color.MAGENTA);
 		View mFragmentView = inflater.inflate(R.layout.main_fragment,container,false);
-		simpleDrawingView = (SimpleDrawingView)mFragmentView.findViewById(R.id.main_fragment);
+		simpleDrawingView = (CircleContainerView)mFragmentView.findViewById(R.id.main_fragment);
 		RecyclerView recyclerView = (RecyclerView) mFragmentView.findViewById(R.id.circle_bar);
 		LinearLayoutManager layoutManager
 				= new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -56,7 +56,7 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState); 
+		super.onActivityCreated(savedInstanceState);
 	}
 
 

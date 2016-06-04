@@ -5,21 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/circle_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#000000"
-        android:gravity="center_horizontal"
+        android:background="@color/cardview_shadow_end_color"
         android:orientation="horizontal"
-        >
-    </android.support.v7.widget.RecyclerView>
-
-    <main.taskem.com.agri.view.SimpleDrawingView
+        />
+    <main.taskem.com.agri.view.CircleContainerView
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
         android:layout_height="0dp"
         android:layout_weight="8"
         />

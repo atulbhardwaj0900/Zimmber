@@ -20,10 +20,10 @@ import main.taskem.com.agri.models.CirclePoint;
 /**
  * Created by atul.bhardwaj on 04/06/16.
  */
-public class SimpleDrawingView extends FrameLayout {
+public class CircleContainerView extends FrameLayout {
 	private static final int CIRCLE_RADIUS = 100;
 	// setup initial color
-	private int paintColor;
+	private int paintColor = Color.BLUE;
 	// defines paint and canvas
 	private Handler mHandler;
 	// Store circles to draw each time the user touches down
@@ -32,7 +32,7 @@ public class SimpleDrawingView extends FrameLayout {
 	private View mCurrentView;
 	private int mLastRadius;
 
-	public SimpleDrawingView(Context context, AttributeSet attrs) {
+	public CircleContainerView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 		mCirclePointList = DBHelper.getInstance(mContext).getAllPointsList();
@@ -43,7 +43,7 @@ public class SimpleDrawingView extends FrameLayout {
 		}
 	}
 
-	public SimpleDrawingView(Context context) {
+	public CircleContainerView(Context context) {
 		super(context);
 		mContext = context;
 		mCirclePointList = DBHelper.getInstance(mContext).getAllPointsList();
@@ -80,7 +80,7 @@ public class SimpleDrawingView extends FrameLayout {
 					float touchX = event.getX();
 					float touchY = event.getY();
 					mCirclePointList.add(new CirclePoint(Math.round(touchX), Math.round(touchY),
-							CIRCLE_RADIUS / 2));
+							CIRCLE_RADIUS / 2, paintColor) );
 					mLastRadius = CIRCLE_RADIUS;
 					CirclePoint pp = mCirclePointList.get(mCirclePointList.size() - 1);
 					drawCircle(pp);
@@ -126,13 +126,17 @@ public class SimpleDrawingView extends FrameLayout {
 		params.leftMargin = circlePoint.x - circlePoint.r / 2;
 		params.topMargin = circlePoint.y - circlePoint.r / 2;
 		view.setLayoutParams(params);
-		addView(view);
 		GradientDrawable bgShape = (GradientDrawable) view.getBackground();
-		bgShape.setColor(Color.GREEN);
+		bgShape.setColor(circlePoint.color);
+		addView(view);
 		mCurrentView = view;
 	}
 
 	public void setCircleColor(int color) {
 		paintColor = color;
 	}
+	public View  getLastAddedCircle() {
+		return mCurrentView;
+	}
+
 }
