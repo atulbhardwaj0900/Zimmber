@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<fragment
+    android:id="@+id/main_fragment"
+    android:name="main.taskem.com.agri.fragment.MainFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0"
-    android:padding="10dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.ScrollingActivity"
-    tools:showIn="@layout/activity_scrolling">
+    />
 
-    <fragment
-        android:id="@+id/main_fragment"
-        android:name="main.taskem.com.agri.fragment.MainFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-</android.support.v4.widget.NestedScrollView>
