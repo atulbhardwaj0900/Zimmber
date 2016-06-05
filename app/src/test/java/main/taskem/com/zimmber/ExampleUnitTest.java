@@ -1,4 +1,4 @@
-package main.taskem.com.agri;
+package main.taskem.com.zimmber;
 
 import org.junit.Test;
 

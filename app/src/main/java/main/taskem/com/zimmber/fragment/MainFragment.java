@@ -1,4 +1,4 @@
-package main.taskem.com.agri.fragment;
+package main.taskem.com.zimmber.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,26 +12,25 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.taskem.com.agri.R;
-import main.taskem.com.agri.adapter.ListArrayAdapter.OnRecyclerItemClick;
-import main.taskem.com.agri.adapter.MainHorizontalAdapter;
-import main.taskem.com.agri.view.CircleContainerView;
+import main.taskem.com.zimmber.R;
+import main.taskem.com.zimmber.adapter.ListArrayAdapter.OnRecyclerItemClick;
+import main.taskem.com.zimmber.adapter.MainHorizontalAdapter;
+import main.taskem.com.zimmber.view.CircleContainerView;
 
 /**
- * Created by atul.bhardwaj on 30/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<Integer> {
 
-	private CircleContainerView simpleDrawingView;
-	List<Integer> colors;
+	private CircleContainerView mCircleContainerView;
 
 	public MainFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		colors = new ArrayList<Integer>();
+		List<Integer> colors = new ArrayList<Integer>();
 		colors.add(Color.RED);
 		colors.add(Color.GREEN);
 		colors.add(Color.BLUE);
@@ -44,8 +43,8 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<In
 		View view = inflater.inflate(R.layout.main_fragment, container, false);
 		view.findViewById(R.id.reset_btn).setOnClickListener(this);
 		view.findViewById(R.id.undo_btn).setOnClickListener(this);
-		simpleDrawingView = (CircleContainerView) view.findViewById(R.id.main_fragment);
-		simpleDrawingView.setCircleColor(Color.RED);
+		mCircleContainerView = (CircleContainerView) view.findViewById(R.id.main_fragment);
+		mCircleContainerView.setCircleColor(Color.RED);
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.circle_bar);
 		LinearLayoutManager layoutManager =
 				new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -64,13 +63,13 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<In
 
 	@Override
 	public void onBackPressed() {
-		simpleDrawingView.savePointsList();
+		mCircleContainerView.savePointsList();
 		mBaseActivity.finish();
 	}
 
 	@Override
 	public void onRecyclerItemClick(int position, Integer object) {
-		simpleDrawingView.setCircleColor(object);
+		mCircleContainerView.setCircleColor(object);
 	}
 
 	@Override
@@ -78,14 +77,16 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<In
 		int id = view.getId();
 		switch (id) {
 			case R.id.reset_btn: {
-				simpleDrawingView.removeAllViews();
-				simpleDrawingView.clearPointsList();
+				mCircleContainerView.removeAllViews();
+				mCircleContainerView.clearPointsList();
 				break;
 			}
 			case R.id.undo_btn: {
-				int count  = simpleDrawingView.getChildCount();
-				simpleDrawingView.removeViewAt(count-1);
-				simpleDrawingView.removePointAt(count-1);
+				int count = mCircleContainerView.getChildCount();
+				if (count > 0) {
+					mCircleContainerView.removeViewAt(count - 1);
+					mCircleContainerView.removePointAt(count - 1);
+				}
 				break;
 			}
 		}

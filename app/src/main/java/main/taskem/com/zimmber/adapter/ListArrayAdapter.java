@@ -1,4 +1,4 @@
-package main.taskem.com.agri.adapter;
+package main.taskem.com.zimmber.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import main.taskem.com.agri.adapter.ListArrayAdapter.BaseViewHolder;
+import main.taskem.com.zimmber.adapter.ListArrayAdapter.BaseViewHolder;
 
 /**
- * Created by atul.bhardwaj on 30/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  */
 public class ListArrayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 

@@ -1,4 +1,4 @@
-package main.taskem.com.agri;
+package main.taskem.com.zimmber;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,11 +1,11 @@
-package main.taskem.com.agri.activity;
+package main.taskem.com.zimmber.activity;
 
 import android.os.Bundle;
 
-import main.taskem.com.agri.R;
+import main.taskem.com.zimmber.R;
 
 /**
- * Created by atul.bhardwaj on 30/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  */
 public class ScrollingActivity extends BaseActivity {
 

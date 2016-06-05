@@ -1,4 +1,4 @@
-package main.taskem.com.agri.adapter;
+package main.taskem.com.zimmber.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import main.taskem.com.agri.R;
+import main.taskem.com.zimmber.R;
 
 
 /**
- * Created by atul.bhardwaj on 30/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  */
 public class MainHorizontalAdapter extends ListArrayAdapter {
 

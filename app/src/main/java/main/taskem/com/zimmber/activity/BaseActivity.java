@@ -1,4 +1,4 @@
-package main.taskem.com.agri.activity;
+package main.taskem.com.zimmber.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import main.taskem.com.agri.R;
-import main.taskem.com.agri.common.OnBackPressedListener;
+import main.taskem.com.zimmber.R;
+import main.taskem.com.zimmber.common.OnBackPressedListener;
 
 /**
- * Created by atul.bhardwaj on 30/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  */
 public class BaseActivity extends AppCompatActivity {
 	protected OnBackPressedListener onBackPressedListener;

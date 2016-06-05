@@ -13,9 +13,10 @@
         android:layout_weight="1"
         android:background="@color/black"
         android:orientation="horizontal"
+        android:padding="2dp"
         />
 
-    <main.taskem.com.agri.view.CircleContainerView
+    <main.taskem.com.zimmber.view.CircleContainerView
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

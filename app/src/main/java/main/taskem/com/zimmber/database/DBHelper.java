@@ -1,7 +1,7 @@
-package main.taskem.com.agri.database;
+package main.taskem.com.zimmber.database;
 
 /**
- * Created by atul.bhardwaj on 21/05/16.
+ * Created by atul.bhardwaj on 04/06/16.
  */
 
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.taskem.com.agri.models.CirclePoint;
+import main.taskem.com.zimmber.models.CirclePoint;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -50,15 +50,14 @@ public class DBHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void clearTable(String tableName){
+	public void clearTable(String tableName) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(tableName, null, null);
 	}
 
-	public void savePoints(List<CirclePoint> itemsList) {
-		if(itemsList != null && itemsList.size() >0) {
-
-			SQLiteDatabase db = this.getWritableDatabase();
+	public void savePoints(final List<CirclePoint> itemsList) {
+		if (itemsList != null && itemsList.size() > 0) {
+			SQLiteDatabase db = DBHelper.this.getWritableDatabase();
 			db.delete(ZIMMBER_TABLE, null, null);
 			try {
 				db.beginTransaction();
@@ -89,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public int numberOfRows() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		int numRows = (int) DatabaseUtils.queryNumEntries(db, ZIMMBER_TABLE);
-		Log.e("******", numRows+"");
+		Log.e("******", numRows + "");
 		return numRows;
 	}
 
@@ -103,8 +102,10 @@ public class DBHelper extends SQLiteOpenHelper {
 			CirclePoint point;
 			while (!res.isAfterLast()) {
 				point = new CirclePoint();
-				point.set(res.getInt(res.getColumnIndex(CIRCLE_X)), res.getInt(res.getColumnIndex(CIRCLE_Y)), res.getInt(res.getColumnIndex(
-						CIRCLE_R)),res.getInt(res.getColumnIndex(CIRCLE_COLOR)));
+				point.set(res.getInt(res.getColumnIndex(CIRCLE_X)),
+						res.getInt(res.getColumnIndex(CIRCLE_Y)),
+						res.getInt(res.getColumnIndex(CIRCLE_R)),
+						res.getInt(res.getColumnIndex(CIRCLE_COLOR)));
 				list.add(point);
 				res.moveToNext();
 			}

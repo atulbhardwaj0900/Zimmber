@@ -1,4 +1,4 @@
-package main.taskem.com.agri.models;
+package main.taskem.com.zimmber.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
