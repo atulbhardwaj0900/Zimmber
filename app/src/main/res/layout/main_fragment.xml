@@ -5,20 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/circle_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/cardview_shadow_end_color"
+        android:background="@color/black"
         android:orientation="horizontal"
         />
+
     <main.taskem.com.agri.view.CircleContainerView
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_height="0dp"
         android:layout_weight="8"
+        android:background="@color/white"
         />
 
     <LinearLayout
@@ -27,20 +29,30 @@
         android:layout_weight="1"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         >
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RESET"
+            android:background="@color/black"
+            android:text="@string/reset"
             android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="UNDO"
+            android:background="@color/black"
+            android:text="@string/undo"
             android:textColor="@color/white"/>
     </LinearLayout>
 
