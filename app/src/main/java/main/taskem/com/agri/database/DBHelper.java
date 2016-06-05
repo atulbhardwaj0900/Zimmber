@@ -50,6 +50,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	public void clearTable(String tableName){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(tableName, null, null);
+	}
+
 	public void savePoints(List<CirclePoint> itemsList) {
 		if(itemsList != null && itemsList.size() >0) {
 
@@ -95,12 +100,12 @@ public class DBHelper extends SQLiteOpenHelper {
 		Cursor res = db.rawQuery("select * from " + ZIMMBER_TABLE, null);
 		if (res.moveToFirst()) {
 			list = new ArrayList<CirclePoint>();
-			CirclePoint note;
+			CirclePoint point;
 			while (!res.isAfterLast()) {
-				note = new CirclePoint();
-				note.set(res.getInt(res.getColumnIndex(CIRCLE_X)), res.getInt(res.getColumnIndex(CIRCLE_Y)), res.getInt(res.getColumnIndex(
+				point = new CirclePoint();
+				point.set(res.getInt(res.getColumnIndex(CIRCLE_X)), res.getInt(res.getColumnIndex(CIRCLE_Y)), res.getInt(res.getColumnIndex(
 						CIRCLE_R)),res.getInt(res.getColumnIndex(CIRCLE_COLOR)));
-				list.add(note);
+				list.add(point);
 				res.moveToNext();
 			}
 		}

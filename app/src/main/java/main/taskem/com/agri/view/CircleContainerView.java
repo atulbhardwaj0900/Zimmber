@@ -55,6 +55,14 @@ public class CircleContainerView extends FrameLayout {
 
 	}
 
+	public void clearPointsList() {
+		mCirclePointList.clear();
+	}
+
+	public void removePointAt(int index) {
+		mCirclePointList.remove(index);
+	}
+
 	private void setupPaint() {
 		for (CirclePoint circlePoint : mCirclePointList) {
 			drawCircle(circlePoint);
@@ -80,7 +88,7 @@ public class CircleContainerView extends FrameLayout {
 					float touchX = event.getX();
 					float touchY = event.getY();
 					mCirclePointList.add(new CirclePoint(Math.round(touchX), Math.round(touchY),
-							CIRCLE_RADIUS / 2, paintColor) );
+							CIRCLE_RADIUS / 2, paintColor));
 					mLastRadius = CIRCLE_RADIUS;
 					CirclePoint pp = mCirclePointList.get(mCirclePointList.size() - 1);
 					drawCircle(pp);
@@ -135,8 +143,6 @@ public class CircleContainerView extends FrameLayout {
 	public void setCircleColor(int color) {
 		paintColor = color;
 	}
-	public View  getLastAddedCircle() {
-		return mCurrentView;
-	}
+
 
 }

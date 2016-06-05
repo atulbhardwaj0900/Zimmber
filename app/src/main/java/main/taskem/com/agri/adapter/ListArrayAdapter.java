@@ -5,24 +5,23 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.List;
 
-import main.taskem.com.agri.adapter.JsonArrayAdapter.BaseViewHolder;
+import main.taskem.com.agri.adapter.ListArrayAdapter.BaseViewHolder;
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
  */
-public class JsonArrayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class ListArrayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-	private JSONArray mData;
-	private OnRecyclerItemClick<JSONObject> mOnRecyclerItemClick;
+	private List<Integer> mData;
+	private OnRecyclerItemClick<Integer> mOnRecyclerItemClick;
 
-	public JsonArrayAdapter() {
+	public ListArrayAdapter() {
 
 	}
 
-	public JsonArrayAdapter(OnRecyclerItemClick<JSONObject> onRecyclerItemClick) {
+	public ListArrayAdapter(OnRecyclerItemClick<Integer> onRecyclerItemClick) {
 		mOnRecyclerItemClick = onRecyclerItemClick;
 	}
 
@@ -33,19 +32,19 @@ public class JsonArrayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
 	@Override
 	public void onBindViewHolder(BaseViewHolder holder, int position) {
-		bindDataToView(holder, mData.optJSONObject(position), position);
+		bindDataToView(holder, mData.get(position), position);
 	}
 
-	protected void bindDataToView(BaseViewHolder holder, JSONObject note, int position) {
+	protected void bindDataToView(BaseViewHolder holder, int note, int position) {
 
 	}
 
 	@Override
 	public int getItemCount() {
-		return mData == null ? 0 : mData.length();
+		return mData == null ? 0 : mData.size();
 	}
 
-	public void setList(JSONArray mData) {
+	public void setList(List<Integer> mData) {
 		this.mData = mData;
 		notifyDataSetChanged();
 	}
@@ -66,7 +65,7 @@ public class JsonArrayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 		public void onClick(View view) {
 
 			mOnRecyclerItemClick
-					.onRecyclerItemClick(getLayoutPosition(), mData.optJSONObject(getLayoutPosition()));
+					.onRecyclerItemClick(getLayoutPosition(), mData.get(getLayoutPosition()));
 		}
 	}
 
